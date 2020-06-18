@@ -1,6 +1,7 @@
 # Voltage Peak-To-Peak
 
 An extension that adds a Vpeak-to-peak metric to analog measurements.
+![Voltage Peak to Peak](files/voltage_peak_to_peak.png)
 
 ## Instructions
 1. Install this extension by clicking "Install"
