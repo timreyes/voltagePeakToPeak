@@ -18,6 +18,9 @@ class VoltagePeakToPeak(AnalogMeasurer):
         if PEAK_TO_PEAK in self.requested_measurements:
             self.peak_value = 0
 
+        self.minimum_value = numpy.inf
+        self.maximum_value = -numpy.inf
+
     # This method will be called one or more times per measurement with batches of data
     # data has the following interface
     #   * Iterate over to get Voltage values, one per sample
@@ -26,9 +29,9 @@ class VoltagePeakToPeak(AnalogMeasurer):
     def process_data(self, data):
         if self.peak_value is not None:
             min_val = numpy.amin(data.samples)
-            self.minimum_value = min_val
+            self.minimum_value = min(self.minimum_value, min_val)
             max_val = numpy.amax(data.samples)
-            self.maximum_value = max_val
+            self.maximum_value = max(self.maximum_value, max_val)
 
     # This method is called after all the relevant data has been passed to `process_data`
     # It returns a dictionary of the request_measurements values
